@@ -1,0 +1,30 @@
+[
+    {
+     "id": "1",
+     "name": "Costco Bill",
+     "type": "Grocery",
+     "amount": "95.75",
+     "percentage": "61"
+    },
+    {
+     "id": "2",
+     "name": "McDonalds",
+     "type": "Eat Out",
+     "amount": "20.55",
+     "percentage": "19"
+    },
+    {
+     "id": "3",
+     "name": "Olive Oil",
+      "type": "Grocery",
+     "amount": "7.95",
+     "percentage": "13"
+    },
+    {
+     "id": "4",
+     "name": "Steakhouse",
+     "amount": "200.95",
+     "type": "Eat Out",
+     "percentage": "5"
+    }
+   ]

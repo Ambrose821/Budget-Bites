@@ -12,19 +12,17 @@ export default function Layout() {
           position: 'absolute',
           bottom: 40,
           justifyContent: 'center',
-          alignSelf: 'center',
-
-          height: 63,
+          alignItems: 'center',
+          height: 68,
           marginHorizontal: 60,
           paddingHorizontal: 10,
           paddingVertical: 10,
-          paddingTop: 11,
-
+          paddingTop: 15,
           borderRadius: 40,
           borderWidth: 1,
           borderTopWidth: 1,
           borderColor: '#333',
-          backgroundColor: Colors.black, // Add explicit background color
+          backgroundColor: Colors.grey, // Add explicit background color
           elevation: 10, // Add elevation for Android shadow
         },
         tabBarShowLabel: false,

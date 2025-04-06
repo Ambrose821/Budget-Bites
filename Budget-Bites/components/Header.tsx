@@ -23,9 +23,17 @@ const Header = () => {
           justifyContent: 'space-between',
           paddingHorizontal: 20,
         }}>
-        <Image
-          source={{ uri: 'https://i.pravatar.cc/250?u=12' }}
-          style={{ height: 50, width: 50, borderRadius: 30 }}></Image>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Image
+            source={{
+              uri: 'https://media.licdn.com/dms/image/v2/D4E03AQGR03aamGdGMg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1686529696292?e=2147483647&v=beta&t=BttlUTkMixJOA1v6UjhYUuD4QHt01a6QfkBKt5aYPgQ',
+            }}
+            style={{ height: 50, width: 50, borderRadius: 30 }}></Image>
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ color: 'white', fontSize: 12 }}>Welcome Back</Text>
+            <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }}>Your Budget</Text>
+          </View>
+        </View>
         <TouchableOpacity
           onPress={() => {}}
           style={{ borderColor: '#666', borderWidth: 1, padding: 8, borderRadius: 10 }}>
