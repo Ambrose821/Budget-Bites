@@ -28,6 +28,7 @@ export default function Layout() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: Colors.white,
         tabBarInactiveTintColor: '#999',
+        tabBarHideOnKeyboard: true,
       }}>
       <Tabs.Screen
         name="index"

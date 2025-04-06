@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TextInput,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from 'react-native';
 import { Stack } from 'expo-router';
 
@@ -21,19 +22,19 @@ import ExpenseList from '@/data/expenses.json';
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { ExpenseType } from '@/types';
+import meals from '@/data/meal.json';
 
 import { BlurView } from 'expo-blur';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import MealDetail from '@/components/MealDetails';
 export default function Index() {
   const [totalCost, setTotalCost] = useState<Number>(0);
+  const [expenses, setExpenses] = useState(ExpenseList);
 
   useEffect(() => {
-    const cost = ExpenseList.reduce(
-      (accumulator, expense) => accumulator + Number(expense.amount),
-      0
-    );
+    const cost = expenses.reduce((accumulator, expense) => accumulator + Number(expense.amount), 0);
     setTotalCost(cost);
-  }, [ExpenseList]);
+  }, [expenses]);
 
   const [showForm, setShowForm] = useState<Boolean>(false);
 
@@ -51,7 +52,7 @@ export default function Index() {
       percentage: '8',
     };
     console.log(newExpense);
-    ExpenseList.push(newExpense);
+    setExpenses((prev) => [newExpense, ...prev]);
     setPurchaseAmount('');
     setPurchaseType('');
     setPurchaseName('');
@@ -64,18 +65,18 @@ export default function Index() {
   };
   const pieData = [
     {
-      value: 47,
+      value: 87,
       color: Colors.tintColor,
       focused: true,
-      text: '47%',
+      text: '7%',
     },
     {
-      value: 40,
+      value: 10,
       color: Colors.blue,
       text: '40%',
     },
     {
-      value: 16,
+      value: 1,
       color: Colors.white,
       text: '16%',
     },
@@ -92,11 +93,14 @@ export default function Index() {
         }}
       />
 
-      <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={true}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          showsVerticalScrollIndicator={true}
+          contentContainerStyle={{ paddingBottom: 120 }}>
           <View
             style={{
-              padding: 10,
+              padding: 10, // Adjust this value based on your tab bar height + spacing
+
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -130,7 +134,7 @@ export default function Index() {
               />
             </View>
           </View>
-          <ExpenseBlock expenseList={ExpenseList.reverse()}></ExpenseBlock>
+          <ExpenseBlock expenseList={expenses}></ExpenseBlock>
           <TouchableOpacity
             onPress={() => {
               setShowForm(!showForm);
@@ -150,8 +154,25 @@ export default function Index() {
             <Text style={{ color: 'white', fontSize: 14, fontWeight: '500' }}>Add Purchase</Text>
             <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>+</Text>
           </TouchableOpacity>
+
+          {/* Add a section title for meals */}
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginTop: 30,
+              marginBottom: 10,
+            }}>
+            My <Text style={{ color: Colors.tintColor }}>Meals</Text>
+          </Text>
+
+          {/* Render the meals */}
+          {meals.map((meal) => (
+            <MealDetail key={meal.id} meal={meal} />
+          ))}
         </ScrollView>
-      </View>
+      </SafeAreaView>
 
       {showForm && (
         <>
@@ -190,7 +211,6 @@ export default function Index() {
               <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}> Purchase</Text>
             </View>
 
-            {/* Text Input */}
             <Text style={{ color: 'white', marginBottom: 4 }}>Purchase Title</Text>
             <TextInput
               value={purchaseName}
@@ -220,7 +240,6 @@ export default function Index() {
               }}
             />
 
-            {/* Dropdown / Picker */}
             <Text style={{ color: 'white', marginBottom: 4 }}>Category</Text>
             <Picker
               selectedValue={purchaseType}
@@ -234,7 +253,6 @@ export default function Index() {
               <Picker.Item label="Eat Out" value="eat out" />
             </Picker>
 
-            {/* Submit Button */}
             <TouchableOpacity
               onPress={() => handleSubmit()}
               style={{
