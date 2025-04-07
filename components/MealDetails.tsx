@@ -17,6 +17,7 @@ type MealProps = {
   servings: number;
   instructions: string;
   image_url: string;
+  type: string;
 };
 
 export default function MealDetail({ meal }: { meal: MealProps }) {
@@ -38,6 +39,7 @@ export default function MealDetail({ meal }: { meal: MealProps }) {
           <View>
             <Text style={styles.label}>Total Cost</Text>
             <Text style={styles.costValue}>${meal.totalCost}</Text>
+            <Text style={styles.servingValue}>{meal.type}</Text>
           </View>
           <View style={styles.servingInfo}>
             <Text style={styles.label}>Per Serving</Text>

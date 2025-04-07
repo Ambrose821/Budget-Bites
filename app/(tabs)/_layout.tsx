@@ -108,6 +108,13 @@ export default function Layout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="mealSearch"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

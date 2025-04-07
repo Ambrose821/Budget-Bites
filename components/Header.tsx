@@ -34,11 +34,6 @@ const Header = () => {
             <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }}>Your Budget</Text>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={() => {}}
-          style={{ borderColor: '#666', borderWidth: 1, padding: 8, borderRadius: 10 }}>
-          <Text style={{ color: Colors.white, fontSize: 12 }}> My Transactions</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

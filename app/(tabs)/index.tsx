@@ -22,14 +22,17 @@ import ExpenseList from '@/data/expenses.json';
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { ExpenseType } from '@/types';
-import meals from '@/data/meal.json';
-
+import { useRouter } from 'expo-router';
+// import meals from '@/data/meal.json';
 import { BlurView } from 'expo-blur';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MealDetail from '@/components/MealDetails';
+import { BudgetAppProvider, useBudgetProvider } from '@/Contexts/BudgetAppContext';
 export default function Index() {
+  const router = useRouter();
   const [totalCost, setTotalCost] = useState<Number>(0);
   const [expenses, setExpenses] = useState(ExpenseList);
+  const { meals, setMeals } = useBudgetProvider();
 
   useEffect(() => {
     const cost = expenses.reduce((accumulator, expense) => accumulator + Number(expense.amount), 0);
@@ -154,20 +157,46 @@ export default function Index() {
             <Text style={{ color: 'white', fontSize: 14, fontWeight: '500' }}>Add Purchase</Text>
             <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>+</Text>
           </TouchableOpacity>
-
-          {/* Add a section title for meals */}
-          <Text
+          <View
             style={{
-              color: 'white',
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginTop: 30,
-              marginBottom: 10,
+              height: 1,
+              backgroundColor: 'white', // You can use any color that fits your design
+              marginVertical: 25,
+              opacity: 0.5, // Makes the line more subtle
+              width: '100%',
+            }}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              height: 50,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingHorizontal: 10,
             }}>
-            My <Text style={{ color: Colors.tintColor }}>Meals</Text>
-          </Text>
-
-          {/* Render the meals */}
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginTop: 15,
+                marginBottom: 10,
+              }}>
+              My <Text style={{ color: Colors.tintColor }}>Meals</Text>
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                router.push('/(tabs)/meals');
+              }}
+              style={{
+                borderColor: Colors.tintColor,
+                borderWidth: 1,
+                padding: 8,
+                borderRadius: 10,
+              }}>
+              <Text style={{ color: Colors.white, fontSize: 12 }}> All Meals</Text>
+            </TouchableOpacity>
+          </View>
           {meals.map((meal) => (
             <MealDetail key={meal.id} meal={meal} />
           ))}

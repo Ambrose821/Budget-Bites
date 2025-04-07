@@ -6,7 +6,8 @@
      "ingredients":[{"item":"chicken breast","cost":"12.00"},{"item":"fusili pasta","cost":"8.00"},{"item":"Sauce","cost":"6.00"}],
      "servings":8,
      "instructions": "Heat up your saucepan at medium to high heat.......",
-     "image_url":"https://www.shutterstock.com/image-photo/chicken-alfredo-penne-creamy-pasta-600nw-2430169591.jpg"
+     "image_url":"https://www.shutterstock.com/image-photo/chicken-alfredo-penne-creamy-pasta-600nw-2430169591.jpg",
+     "type":"Vegan"
     }
    
    ]
