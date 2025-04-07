@@ -84,6 +84,7 @@ export default function Index() {
       text: '16%',
     },
   ];
+  console.log('ENV KEY:', process.env.EXPO_PUBLIC_OPEN_AI_KEY);
   return (
     <>
       <StatusBar

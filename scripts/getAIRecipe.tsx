@@ -4,7 +4,7 @@ import type { ChatCompletionTool } from 'openai/resources/chat/completions';
 import { z } from 'zod';
 
 const openai = new OpenAI({
-  apiKey: 'AI KEY',
+  apiKey: process.env.EXPO_PUBLIC_OPEN_AI_KEY,
 });
 
 const IngredientSchema = z.object({
