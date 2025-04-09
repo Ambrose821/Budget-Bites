@@ -10,7 +10,7 @@ const VerticalExpenseList = ({ expenseList }: { expenseList: ExpenseType[] }) =>
       <View
         style={[
           styles.expenseItem,
-          { backgroundColor: item.type === 'Grocery' ? Colors.tintColor : Colors.blue },
+          { borderWidth: 1, borderColor: item.type === 'Grocery' ? Colors.tintColor : Colors.blue },
         ]}>
         <View style={styles.expenseDetails}>
           <Text style={styles.expenseName}>{item.name}</Text>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 15,
     marginBottom: 12,
+    backgroundColor: Colors.grey,
   },
   expenseDetails: {
     flex: 1,

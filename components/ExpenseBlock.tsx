@@ -9,7 +9,7 @@ const ExpenseBlock = ({ expenseList }: { expenseList: ExpenseType[] }) => {
       <View
         style={[
           styles.expenseBlock,
-          { backgroundColor: item.type === 'Grocery' ? Colors.tintColor : Colors.blue },
+          { borderWidth: 1, borderColor: item.type === 'Grocery' ? Colors.tintColor : Colors.blue },
         ]}>
         <Text style={styles.expenseBlockTxt1}>{item.name}</Text>
         <Text style={styles.expenseBlockTxt2}>${item.amount}</Text>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   expenseBlock: {
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    backgroundColor: Colors.tintColor,
+    backgroundColor: Colors.grey,
     width: 120,
     padding: 15,
     borderRadius: 15,

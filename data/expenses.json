@@ -10,7 +10,7 @@
   {
     "id": "2",
     "name": "McDonalds",
-    "type": "Eat Out",
+    "type": "Eat out",
     "amount": "20.55",
     "percentage": "19",
     "date": "2025-04-03"
@@ -26,7 +26,7 @@
   {
     "id": "4",
     "name": "Steakhouse",
-    "type": "Eat Out",
+    "type": "Eat out",
     "amount": "200.95",
     "percentage": "5",
     "date": "2025-04-07"

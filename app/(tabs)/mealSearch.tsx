@@ -184,6 +184,7 @@ export default function MealSearch() {
               <TouchableOpacity
                 onPress={() => {
                   saveMeal(newMeal);
+                  router.push('/(tabs)/meals');
                 }}
                 style={{
                   marginTop: 30,
