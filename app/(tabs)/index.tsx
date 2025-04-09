@@ -18,7 +18,7 @@ import Header from '@/components/Header';
 
 import { PieChart } from 'react-native-gifted-charts';
 import ExpenseBlock from '@/components/ExpenseBlock';
-import ExpenseList from '@/data/expenses.json';
+
 import React, { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { ExpenseType } from '@/types';
@@ -28,16 +28,12 @@ import { BlurView } from 'expo-blur';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MealDetail from '@/components/MealDetails';
 import { BudgetAppProvider, useBudgetProvider } from '@/Contexts/BudgetAppContext';
+import { number } from 'zod';
 export default function Index() {
   const router = useRouter();
-  const [totalCost, setTotalCost] = useState<Number>(0);
-  const [expenses, setExpenses] = useState(ExpenseList);
-  const { meals, setMeals } = useBudgetProvider();
 
-  useEffect(() => {
-    const cost = expenses.reduce((accumulator, expense) => accumulator + Number(expense.amount), 0);
-    setTotalCost(cost);
-  }, [expenses]);
+  const { meals, setMeals, expenses, setExpenses, pieData, totalCost, percent } =
+    useBudgetProvider();
 
   const [showForm, setShowForm] = useState<Boolean>(false);
 
@@ -59,32 +55,8 @@ export default function Index() {
     setPurchaseAmount('');
     setPurchaseType('');
     setPurchaseName('');
-
-    const cost = ExpenseList.reduce(
-      (accumulator, expense) => accumulator + Number(expense.amount),
-      0
-    );
-    setTotalCost(cost);
   };
-  const pieData = [
-    {
-      value: 87,
-      color: Colors.tintColor,
-      focused: true,
-      text: '7%',
-    },
-    {
-      value: 10,
-      color: Colors.blue,
-      text: '40%',
-    },
-    {
-      value: 1,
-      color: Colors.white,
-      text: '16%',
-    },
-  ];
-  console.log('ENV KEY:', process.env.EXPO_PUBLIC_OPEN_AI_KEY);
+
   return (
     <>
       <StatusBar
@@ -111,7 +83,7 @@ export default function Index() {
             }}>
             <View>
               <Text style={{ color: 'white', fontSize: 16 }}>
-                My<Text style={{ color: 'white', fontWeight: 'bold' }}> Expenses</Text>
+                This Month's<Text style={{ color: 'white', fontWeight: 'bold' }}> Expenses</Text>
               </Text>
               <Text style={{ color: 'white', fontSize: 36, fontWeight: 700 }}>
                 $ {Number(totalCost || 0).toFixed(2)}
@@ -130,8 +102,18 @@ export default function Index() {
                 innerCircleColor={Colors.black}
                 centerLabelComponent={() => {
                   return (
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                      <Text style={{ fontSize: 22, color: 'white', fontWeight: 'bold' }}>47%</Text>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                      }}>
+                      <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>
+                        {String(percent)}%{' '}
+                      </Text>
+                      <Text style={{ fontSize: 14, color: 'white', fontWeight: '500' }}>
+                        Take Out
+                      </Text>
                     </View>
                   );
                 }}
@@ -279,8 +261,8 @@ export default function Index() {
                 marginBottom: 12,
               }}>
               <Picker.Item label="Select category" value="" />
-              <Picker.Item label="Grocery" value="food" />
-              <Picker.Item label="Eat Out" value="eat out" />
+              <Picker.Item label="Grocery" value="Grocery" />
+              <Picker.Item label="Eat Out" value="Eat out" />
             </Picker>
 
             <TouchableOpacity

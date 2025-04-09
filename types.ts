@@ -4,4 +4,5 @@ export interface ExpenseType {
   type: string;
   amount: string;
   percentage: string;
+  date: string;
 }
